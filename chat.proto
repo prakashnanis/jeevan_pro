@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+service ChatService {
+  rpc Join (JoinRequest) returns (StreamMessage);
+  rpc SendMessage (Message) returns (Empty);
+  rpc Heartbeat (User) returns (Empty);
+}
+
+message JoinRequest {
+  string username = 1;
+  string room = 2;
+}
+
+message Message {
+  string username = 1;
+  string text = 2;
+  string room = 3;
+  string timestamp = 4;  // Added timestamp field here
+}
+
+message StreamMessage {
+  repeated Message messages = 1;
+}
+
+message User {
+  string username = 1;
+}
+
+message Empty {}
